@@ -22,8 +22,8 @@ def pregunta_01():
     40
 
     """
-    return
-
+    cantidad_filas_tbl0 = len(tbl0)
+    return cantidad_filas_tbl0
 
 def pregunta_02():
     """
@@ -33,7 +33,9 @@ def pregunta_02():
     4
 
     """
-    return
+    cantidad_columnas_tbl0 = tbl0.shape
+    return cantidad_columnas_tbl0 [1]
+
 
 
 def pregunta_03():
@@ -50,7 +52,10 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    datos_unicos_c1 = tbl0['_c1'].value_counts().sort_index()
+    return datos_unicos_c1
+
+
 
 
 def pregunta_04():
@@ -65,8 +70,8 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
-
+    promedio = tbl0.groupby('_c1')['_c2'].mean()
+    return promedio
 
 def pregunta_05():
     """
@@ -82,7 +87,10 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    maximo = tbl0.groupby('_c1')['_c2'].max()
+    return maximo
+
+
 
 
 def pregunta_06():
@@ -94,7 +102,13 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+
+    unico = tbl1['_c4'].str.upper().unique()
+    unico.sort()
+
+    return list(unico)
+
+
 
 
 def pregunta_07():
@@ -110,7 +124,10 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+    suma = tbl0.groupby('_c1')['_c2'].sum()
+    return suma
+
+    
 
 
 def pregunta_08():
@@ -128,7 +145,14 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    
+    tbl0_1 = tbl0
+    tbl0_1['suma']= tbl0_1[['_c0','_c2']].sum(axis=1)
+
+    return tbl0_1
+
+
+
 
 
 def pregunta_09():
@@ -146,7 +170,13 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    tbl0_1 = tbl0
+    tbl0_1['_c3']=tbl0_1._c3.replace({'1999-02-29':'1999-02-28'})
+    tbl0_1['_c3'] = pd.to_datetime(tbl0_1['_c3'], errors='coerce')
+    tbl0_1['year'] = tbl0_1['_c3'].dt.strftime('%Y')
+    return tbl0_1
+
+
 
 
 def pregunta_10():
@@ -163,7 +193,11 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    tbl0_1 = tbl0
+    
+    nueva_tabla=tbl0_1.groupby('_c1')['_c2'].apply(lambda x: ':'.join(sorted(x.astype(str))))
+    nueva_tabla=pd.DataFrame(nueva_tabla)
+    return nueva_tabla
 
 
 def pregunta_11():
@@ -182,8 +216,9 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
-
+    tbl1_1 = tbl1
+    tbl1_1 = tbl1_1.groupby('_c0')['_c4'].apply(lambda x: ','.join(sorted(x))).reset_index()
+    return tbl1_1
 
 def pregunta_12():
     """
@@ -200,7 +235,11 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    tbl2_1=tbl2
+    tbl2_1['_c5']=tbl2_1['_c5a']+':'+tbl2_1['_c5b'].astype(str)
+    tbl2_1=tbl2.groupby('_c0')['_c5'].apply(lambda x: ','.join(sorted(x))).reset_index()
+
+    return tbl2_1
 
 
 def pregunta_13():
@@ -217,4 +256,10 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    tbl0_1=tbl0
+    tbl2_1=tbl2
+
+    union = pd.merge(tbl0_1, tbl2_1, on='_c0')
+    union =union.groupby('_c1')['_c5b'].sum()
+    
+    return union

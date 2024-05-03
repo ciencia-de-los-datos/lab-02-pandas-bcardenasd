@@ -54,6 +54,7 @@ def test_07():
     )
 
 
+
 def test_08():
     assert preguntas.pregunta_08().columns.tolist() == [
         "_c0",
@@ -132,6 +133,7 @@ def test_09():
     ]
 
 
+
 def test_10():
     assert preguntas.pregunta_10().equals(
         pd.DataFrame(
@@ -168,6 +170,7 @@ def test_11():
     ]
 
 
+
 def test_12():
     assert preguntas.pregunta_12().columns.tolist() == ["_c0", "_c5"]
     assert preguntas.pregunta_12().shape == (40, 2)
@@ -187,10 +190,12 @@ def test_12():
     ]
 
 
+
 def test_13():
     assert preguntas.pregunta_13().equals(
         pd.Series({"A": 146, "B": 134, "C": 81, "D": 112, "E": 275})
     )
+
 
 
 test = {
