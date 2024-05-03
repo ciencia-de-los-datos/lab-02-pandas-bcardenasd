@@ -56,8 +56,6 @@ def pregunta_03():
     return datos_unicos_c1
 
 
-
-
 def pregunta_04():
     """
     Calcule el promedio de _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
@@ -91,8 +89,6 @@ def pregunta_05():
     return maximo
 
 
-
-
 def pregunta_06():
     """
     Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
@@ -102,14 +98,9 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-
     unico = tbl1['_c4'].str.upper().unique()
     unico.sort()
-
     return list(unico)
-
-
-
 
 def pregunta_07():
     """
@@ -128,8 +119,6 @@ def pregunta_07():
     return suma
 
     
-
-
 def pregunta_08():
     """
     Agregue una columna llamada `suma` con la suma de _c0 y _c2 al archivo `tbl0.tsv`.
@@ -148,11 +137,7 @@ def pregunta_08():
     
     tbl0_1 = tbl0
     tbl0_1['suma']= tbl0_1[['_c0','_c2']].sum(axis=1)
-
     return tbl0_1
-
-
-
 
 
 def pregunta_09():
@@ -176,9 +161,6 @@ def pregunta_09():
     tbl0_1['year'] = tbl0_1['_c3'].dt.strftime('%Y')
     return tbl0_1
 
-
-
-
 def pregunta_10():
     """
     Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
@@ -198,7 +180,6 @@ def pregunta_10():
     nueva_tabla=tbl0_1.groupby('_c1')['_c2'].apply(lambda x: ':'.join(sorted(x.astype(str))))
     nueva_tabla=pd.DataFrame(nueva_tabla)
     return nueva_tabla
-
 
 def pregunta_11():
     """
@@ -238,7 +219,6 @@ def pregunta_12():
     tbl2_1=tbl2
     tbl2_1['_c5']=tbl2_1['_c5a']+':'+tbl2_1['_c5b'].astype(str)
     tbl2_1=tbl2.groupby('_c0')['_c5'].apply(lambda x: ','.join(sorted(x))).reset_index()
-
     return tbl2_1
 
 
@@ -258,8 +238,6 @@ def pregunta_13():
     """
     tbl0_1=tbl0
     tbl2_1=tbl2
-
     union = pd.merge(tbl0_1, tbl2_1, on='_c0')
     union =union.groupby('_c1')['_c5b'].sum()
-    
     return union
