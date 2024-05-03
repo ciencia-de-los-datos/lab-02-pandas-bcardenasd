@@ -222,6 +222,7 @@ def pregunta_12():
     return tbl2_1
 
 
+
 def pregunta_13():
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
