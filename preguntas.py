@@ -23,7 +23,7 @@ def pregunta_01():
 
     """
     cantidad_filas_tbl0 = len(tbl0)
-    return cantidad_filas_tbl0
+    return int (cantidad_filas_tbl0)
 
 def pregunta_02():
     """
@@ -33,10 +33,8 @@ def pregunta_02():
     4
 
     """
-    cantidad_columnas_tbl0 = tbl0.shape
-    return cantidad_columnas_tbl0 [1]
-
-
+    cantidad_columnas_tbl0 = len(tbl0.columns)
+    return int (cantidad_columnas_tbl0)
 
 def pregunta_03():
     """
@@ -155,11 +153,13 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    tbl0_1 = tbl0
-    tbl0_1['_c3']=tbl0_1._c3.replace({'1999-02-29':'1999-02-28'})
-    tbl0_1['_c3'] = pd.to_datetime(tbl0_1['_c3'], errors='coerce')
-    tbl0_1['year'] = tbl0_1['_c3'].dt.strftime('%Y')
-    return tbl0_1
+    # tbl0_1['_c3']=tbl0_1._c3.replace({'1999-02-29':'1999-02-28'})
+    # tbl0_1['_c3'] = pd.to_datetime(tbl0_1['_c3'], errors='coerce')
+    # tbl0_1['year'] = tbl0_1['_c3'].dt.strftime('%Y')
+
+    tbl0['year']=tbl0['_c3'].str.split('-').str[0]
+    return tbl0
+
 
 def pregunta_10():
     """
